@@ -43,6 +43,18 @@ CREATE TABLE comanda_produto(
 	FOREIGN KEY (produtoId) REFERENCES produto(id),
 	FOREIGN KEY (comandaID) REFERENCES comanda(id)
 )
+GO
+--drop table pagamento
+CREATE TABLE pagamento (
+    id		int		identity(1,1),
+    dataPagamento DATE DEFAULT GETDATE(), 
+    valor DECIMAL(10, 2),                
+    clienteId INT         
+    PRIMARY KEY (id)
+    FOREIGN KEY (clienteId) REFERENCES cliente(id)
+)
+GO
+select * from pagamento
 --------------------------------------------------------------------
 --Valor Total da Comanda
 SELECT co.id as comanda, SUM(cop.qtd * p.valor) AS valor_total
@@ -113,3 +125,4 @@ select * from comanda
 select * from comanda_produto
 select * from cliente
 select * from produto
+select * from pagamento
